@@ -1,8 +1,10 @@
 
 # GitHub API Stream
 
-Provides scripts to stream all users and repositories 
-from the GitHub API (taking advantage of its pagination).
+This is not a wrapper for the GitHub API.
+
+This repository contains scripts to stream all users and
+repositories from the GitHub API (taking advantage of its pagination).
 The scripts are meant to be run as background processes,
 as they take a while to complete (the huge number of
 users/repositories is a contributing factor, but the GitHub 
