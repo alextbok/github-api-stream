@@ -1,6 +1,5 @@
-=================
-GitHub API Stream
-=================
+
+# GitHub API Stream
 
 Provides scripts to stream all users and repositories 
 from the GitHub API (taking advantage of its pagination).
@@ -26,7 +25,7 @@ developer program (https://developer.github.com/program/)
 
 
 
-Streaming users:
+## Streaming users:
 
   This script can process ~50,000 users per hour
 
@@ -35,7 +34,7 @@ Streaming users:
 
 
 
-Streaming Repositories:
+## Streaming Repositories:
 
   This script can process ~5,000 repositories per hour
 
