@@ -65,12 +65,6 @@ class Repos():
 				#this api call actually returns useful information about the repositories
 				res = self.get_request('https://api.github.com/repos/' + repo['full_name'])
 
-				#if our ratelimit is reached, sleep until the limit expires
-				if int(res.headers['X-RateLimit-Remaining']) < 1:
-                                	print 'Sleeping for ' + str( float(res.headers['X-RateLimit-Reset']) - time.time() ) \
-                                	+ ' seconds. (' + time.ctime(float(res.headers['X-RateLimit-Reset'])) + ' local time)'
-                                	time.sleep(float(res.headers['X-RateLimit-Reset']) - time.time() + 5)
-
 				repos_to_process.append( res.json() )
 
 
