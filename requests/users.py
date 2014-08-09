@@ -29,7 +29,13 @@ class User():
 	Perfoms a get request with the instance's authentication information
 	'''
 	def get_request(self, url):
-		return requests.get(url, auth=(self._username, self._password) )
+		response = requests.get(url, auth=(self._username, self._password) )
+		#if our ratelimit is reached, sleep until the limit expires
+		if int(response.headers['X-RateLimit-Remaining']) < 1:
+			print 'Sleeping for ' + str( float(response.headers['X-RateLimit-Reset']) - time.time() ) \
+			+ ' seconds. (' + time.ctime(float(response.headers['X-RateLimit-Reset'])) + ' local time)'
+			time.sleep(float(response.headers['X-RateLimit-Reset']) - time.time() + 1)
+		return response
 
 	'''
 	This method streams all users from the github api and calls another method to post them to Neo4j
@@ -48,12 +54,6 @@ class User():
 
 				response = self.get_request(url)
 				users = response.json()
-
-				#if our ratelimit is reached, sleep until the limit expires
-				if int(response.headers['X-RateLimit-Remaining']) < 1:
-					print 'Sleeping for ' + str( float(response.headers['X-RateLimit-Reset']) - time.time() ) \
-					+ ' seconds. (' + time.ctime(float(response.headers['X-RateLimit-Reset'])) + ' local time)'
-					time.sleep(float(response.headers['X-RateLimit-Reset']) - time.time() + 1)
 
 				#indicates we have processed all users
 				if len(users) == 0:
