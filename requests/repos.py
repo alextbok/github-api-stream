@@ -49,7 +49,6 @@ class Repos():
 		while True:
 
 			#get the repos returned by the github api repo GET
-			#most contains links to other api calls
 			response = self.get_request(url)
 			repos = response.json()
 
@@ -91,8 +90,8 @@ class Repos():
 			url = response.links['next']['url']
 
 			#some useful info messages
-			print str( len(repos) ) + ' repos processed and posted to solr'
-			print 'id of last repo processed: ' + str( repos[-1]['id'] )
+			print str( len(repos) ) + ' repositories processed'
+			print 'id of last repository processed: ' + str( repos[-1]['id'] )
 			print 'Remaining Requests: ' + response.headers['X-RateLimit-Remaining']
 
 	'''

@@ -52,6 +52,7 @@ class User():
 			#batch together 20 requests (100 users are returned each request)
 			for i in range(20):
 
+				#get the next 100 users
 				response = self.get_request(url)
 				users = response.json()
 
@@ -74,7 +75,7 @@ class User():
 			self.process_users(batch_users)
 
 			#some useful info messages
-			print str( len(batch_users) ) + ' users processed and posted to Neo4j'
+			print str( len(batch_users) ) + ' users processed'
 			print 'id of last user posted: ' + str( batch_users[-1]['id'] )
 			print 'Remaining Requests: ' + response.headers['X-RateLimit-Remaining']
 
